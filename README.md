@@ -1,4 +1,4 @@
-Yongjiu Rental Bicycal Map
+Yongjiu Rental Bicycle Map
 =======================
 
 Thus application is made at beginning to fulfill the developer's own needs that the position and status of parking stations of Yongjiu Rental Bicycle could be accessible at any time. The related information is from Yongjiu's official website: www.chinarmb.com. Somehow due to the inaccuracy of some station's location data, they could be modified by the developer. Any advice on the information or the application is welcomed.
