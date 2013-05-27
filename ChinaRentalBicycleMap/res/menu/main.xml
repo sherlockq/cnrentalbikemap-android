@@ -1,9 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_position"
+        android:icon="@drawable/ic_actionbar_position"
+        android:onClick="onLocationClick"/>
+    <item
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:showAsAction="collapseActionView"
+        android:title="@string/action_about"
+        android:onClick="onAboutClick"/>
 
 </menu>

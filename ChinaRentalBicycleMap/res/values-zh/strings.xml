@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">永久租赁自行车地图</string>
+    <string name="show_cluster_detail">点击放大显示..</string>
+    <string name="station_state">现有自行车%1$d辆，空位%2$d个</string>
+    <string name="loading_state">获取状态信息中..</string>
+    <string name="loading_screen">读取中..</string>
+    <string name="action_position">当前位置</string>
+    <string name="action_about">关于</string>
+    <string name="about_about_title">永久租赁自行车地图</string>
+    <string name="about_about_text">本应用纯粹出发点纯粹是为了满足开发者自己的需求，方便在外查看永久租赁自行车的站点位置，也可通过查看即时的车及桩数量，一定程度解决没车借或者没地方还的情况。\n\n站点信息、站点实时状态信息都是从www.chinarmb.com上抓取的，也可通过该网站的地图查询功能查看。但由于个别位置信息可能不准确，开发者会进行纠正，也欢迎使用者通过邮件联系告知纠错。\n\n邮件:sherlockq@gmail.com</string>
+    <string name="about_acknowledge_title">版权说明</string>
+    <string name="about_acknowledge_text">本应用中涉及到的“永久”字样或图标为上海永久自行车有限公司所有；本应用中的站点名称、地点等信息来源于www.chinarmb.com，但地点可能进行后期纠正；本应用中的站点实时状态取自www.chinarmb.com\n\n本应用使用DBAD授权，详见http://www.dbad-license.org；源代码发布在https://github.com/sherlockq/cnrentalbikemap-android\n\n本应用使用或修改了以下来源的代码、图片，特此说明(可能有遗漏)\n\n-android-maps-extensions:提供了地图功能的扩展，特别是图标集聚功能\n-ActionBarSherlock:提供了Android 3.0以下的版本ActionBar的支持，保持了一致性\n-来自不知来源的自行车适量图，及chinarmb的桩位图，用于应用图标（头上那个是自己画的）\n-来自http://www.yay.se/resources/android-native-icons的矢量图，提供了ActionBar适用的图标</string>
+
+</resources>
