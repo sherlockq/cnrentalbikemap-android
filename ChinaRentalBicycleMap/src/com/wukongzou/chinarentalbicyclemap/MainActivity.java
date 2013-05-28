@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import pl.mg6.android.maps.extensions.ClusteringSettings;
 import pl.mg6.android.maps.extensions.GoogleMap;
 import pl.mg6.android.maps.extensions.GoogleMap.InfoWindowAdapter;
@@ -33,9 +35,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.LatLngBounds.Builder;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.wukongzou.chinarentalbicyclemap.http.ChinarmbStateClient;
-import com.wukongzou.chinarentalbicyclemap.http.StationState;
-import com.wukongzou.chinarentalbicyclemap.http.StationStateHttpResponseHandler;
+import com.wukongzou.chinarentalbicyclemap.http.baidufix.BaiduApiFixClient;
+import com.wukongzou.chinarentalbicyclemap.http.baidufix.BaiduApiFixHttpResponseHandler;
+import com.wukongzou.chinarentalbicyclemap.http.cmbstate.ChinarmbStateClient;
+import com.wukongzou.chinarentalbicyclemap.http.cmbstate.StationState;
+import com.wukongzou.chinarentalbicyclemap.http.cmbstate.StationStateHttpResponseHandler;
 import com.wukongzou.chinarentalbicyclemap.marker.ClusterIconProvider;
 
 public class MainActivity extends SherlockFragmentActivity {
@@ -211,28 +215,44 @@ public class MainActivity extends SherlockFragmentActivity {
 		// set default location
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(31.14106,
 				121.35789), 10));
-		// init locaiton
+		// init location
 		mMap.setOnMyLocationChangeListener(new OnMyLocationChangeListener() {
 			@Override
 			public void onMyLocationChange(Location location) {
-				Log.d("LOCATION", "location changed: " + location);
 				if (location != null) {
-					if (location.getAccuracy() < 100) {
+					if (location.getAccuracy() < 30) {
 						LatLng currentPosition = new LatLng(location
 								.getLatitude(), location.getLongitude());
-						CameraPosition position = CameraPosition
-								.fromLatLngZoom(currentPosition, 15);
-						if (positionMarker != null) {
-							positionMarker.remove();
-							positionMarker = null;
-						}
-						positionMarker = mMap.addMarker(new MarkerOptions()
-								.position(currentPosition)
-								.icon(BitmapDescriptorFactory
-										.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-								.title("I'm Here~"));
-						mMap.moveCamera(CameraUpdateFactory
-								.newCameraPosition(position));
+						Log.d("LOCATION", "using current non-offset position: "
+								+ currentPosition);
+						// use baidu api to fix it, put a not accurate marker
+						// first
+						putLocationMarker(currentPosition, false);
+						BaiduApiFixClient.get(MainActivity.this,
+								currentPosition,
+								new BaiduApiFixHttpResponseHandler() {
+
+									@Override
+									public void onSuccess(LatLng offsetLatlng) {
+										putLocationMarker(offsetLatlng, true);
+									}
+
+									@Override
+									public void onFailure(Throwable arg0,
+											JSONObject arg1) {
+										onFailure(arg0, arg1.toString());
+									}
+
+									@Override
+									public void onFailure(Throwable arg0,
+											String arg1) {
+										Toast.makeText(
+												MainActivity.this,
+												getString(R.string.cant_fix_offset),
+												Toast.LENGTH_LONG).show();
+									}
+								});
+
 						// just shut location tracking down
 						mMap.setMyLocationEnabled(false);
 					} else {
@@ -276,6 +296,29 @@ public class MainActivity extends SherlockFragmentActivity {
 		});
 
 		loadStationMarkers();
+	}
+
+	/**
+	 * 
+	 * @param currentPosition
+	 * @param moveCamera
+	 */
+	protected void putLocationMarker(LatLng currentPosition, boolean moveCamera) {
+		CameraPosition position = CameraPosition.fromLatLngZoom(
+				currentPosition, 15);
+
+		if (positionMarker != null) {
+			positionMarker.remove();
+		}
+		positionMarker = mMap.addMarker(new MarkerOptions()
+				.position(currentPosition)
+				.icon(BitmapDescriptorFactory
+						.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+				.title(getString(R.string.i_am_here)));
+		if (moveCamera) {
+			mMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+		}
+
 	}
 
 	/**

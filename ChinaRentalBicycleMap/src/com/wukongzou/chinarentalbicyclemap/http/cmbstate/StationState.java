@@ -1,4 +1,4 @@
-package com.wukongzou.chinarentalbicyclemap.http;
+package com.wukongzou.chinarentalbicyclemap.http.cmbstate;
 
 /**
  * Record the state of station

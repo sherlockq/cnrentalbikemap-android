@@ -13,4 +13,6 @@
     <string name="about_acknowledge_title">版权说明</string>
     <string name="about_acknowledge_text">本应用中涉及到的“永久”字样或图标为上海永久自行车有限公司所有；本应用中的站点名称、地点等信息来源于www.chinarmb.com，但地点可能进行后期纠正；本应用中的站点实时状态取自www.chinarmb.com\n\n本应用使用DBAD授权，详见http://www.dbad-license.org；源代码发布在https://github.com/sherlockq/cnrentalbikemap-android\n\n本应用使用或修改了以下来源的代码、图片，特此说明(可能有遗漏)\n\n-android-maps-extensions:提供了地图功能的扩展，特别是图标集聚功能\n-ActionBarSherlock:提供了Android 3.0以下的版本ActionBar的支持，保持了一致性\n-来自不知来源的自行车适量图，及chinarmb的桩位图，用于应用图标（头上那个是自己画的）\n-来自http://www.yay.se/resources/android-native-icons的矢量图，提供了ActionBar适用的图标</string>
 
+    <string name="i_am_here">我在这里~</string>
+    <string name="cant_fix_offset">当前位置由于无法纠偏，因此可能并不准确</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.wukongzou.chinarentalbicyclemap.http;
+package com.wukongzou.chinarentalbicyclemap.http.cmbstate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
